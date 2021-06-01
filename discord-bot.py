@@ -41,7 +41,7 @@ async def id_(ctx, user: discord.User):
         insult = random.choice(insults)
         await ctx.channel.send(f"{user.mention}, {insult}")
     else:
-        await ctx.channel.send(f"{user.mention}, you are not allowed to insult, stfu.")
+        await ctx.channel.send(f"{ctx.author.mention}, you are not allowed to insult, stfu.")
 
 
 @client.event
