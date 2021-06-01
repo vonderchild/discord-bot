@@ -52,5 +52,6 @@ async def on_member_join(member):
     await channel.send(embed=embed)
 
 
+get_insult()
 token = os.getenv("DISCORD_BOT_TOKEN")
 client.run(token)
