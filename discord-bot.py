@@ -1,10 +1,20 @@
 import discord
 import os
+import random
 
 from discord.ext import commands
 
 intents = discord.Intents.default()
 intents.members = True
+insults = []
+
+
+def get_insult():
+    global insults
+    f = open('insult.txt', 'r')
+
+    insults = f.readlines()
+
 
 client = commands.Bot(command_prefix='!', intents=intents)
 
@@ -23,6 +33,15 @@ async def id_(ctx, user: discord.User):
 async def id_(ctx):
     user = "<@510833310339956752>"
     await ctx.channel.send(f"BIGGEST GAY OF THE YEAR: {user}")
+
+
+@client.command(name="insult")
+async def id_(ctx, user: discord.User):
+    if ctx.message.author.id == 490516690518540299 or ctx.message.author.id == 510833310339956752:
+        insult = random.choice(insults)
+        await ctx.channel.send(f"{user}, {insult}")
+    else:
+        await ctx.channel.send(f"{user}, you are not allowed to insult, stfu.")
 
 
 @client.event
