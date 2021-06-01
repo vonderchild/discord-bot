@@ -37,7 +37,7 @@ async def id_(ctx):
 
 @client.command(name="insult")
 async def id_(ctx, user: discord.User):
-    if ctx.message.author.id == "490516690518540299" or ctx.message.author.id == "510833310339956752":
+    if ctx.message.author.id == 490516690518540299 or ctx.message.author.id == 510833310339956752:
         insult = random.choice(insults)
         await ctx.channel.send(f"{user.mention}, {insult}")
     else:
