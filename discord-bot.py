@@ -72,7 +72,7 @@ async def on_ready():
     global channel, counter
     print("We have logged in as {0.user}".format(client))
     time.sleep(5)
-    channel = client.get_channel(729293465720062012)
+    channel = client.get_channel(833117650317869061)
 
     # await channel.send("Guess who's back? RICARDO ftw", file=discord.File('ricardo.gif'))
     await channel.send(quotes[counter])
