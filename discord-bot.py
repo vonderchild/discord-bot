@@ -89,3 +89,4 @@ async def printer(self):
 
 get()
 token = os.getenv("DISCORD_BOT_TOKEN")
+client.run(token)
