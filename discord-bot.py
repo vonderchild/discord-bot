@@ -2,19 +2,25 @@ import discord
 import os
 import random
 import time
-from discord.ext import commands
+from discord.ext import commands, tasks
 
 intents = discord.Intents.default()
 intents.members = True
 insults = []
-channel = 0
+quotes = []
+counter = 0
 
 
-def get_insult():
-    global insults
+def get():
+    global insults, quotes
+
     f = open('insult.txt', 'r')
-
     insults = f.readlines()
+    f.close()
+
+    f = open('quotes.txt', 'r')
+    quotes = f.readlines()
+    f.close()
 
 
 client = commands.Bot(command_prefix='!', intents=intents)
@@ -28,6 +34,14 @@ async def id_(ctx, user: discord.User):
 @client.command(name="chup")
 async def id_(ctx, user: discord.User):
     await ctx.channel.send(f"Chup kar kutte {user.mention}")
+
+
+@client.command(name="encourage")
+async def id_(ctx):
+    global counter
+    await ctx.channel.send(quotes[counter])
+    if counter != 498:
+        counter += 1
 
 
 @client.command(name="gay")
@@ -48,7 +62,6 @@ async def id_(ctx, user: discord.User):
 @client.event
 async def on_member_join(member):
     global channel
-    channel = client.get_channel(833117650317869061)
     embed = discord.Embed(title=f"Welcome {member.name}", description=f"Thanks for joining {member.guild.name}!")
     embed.set_thumbnail(url=member.avatar_url)
     await channel.send(embed=embed)
@@ -56,15 +69,23 @@ async def on_member_join(member):
 
 @client.event
 async def on_ready():
-    global channel
-
+    global channel, counter
     print("We have logged in as {0.user}".format(client))
     time.sleep(5)
-    channel = client.get_channel(833117650317869061)
+    channel = client.get_channel(729293465720062012)
 
-    await channel.send("Guess who's back? RICARDO ftw", file=discord.File('ricardo.gif'))
+    # await channel.send("Guess who's back? RICARDO ftw", file=discord.File('ricardo.gif'))
+    await channel.send(quotes[counter])
+    counter += 1
 
 
-get_insult()
+@tasks.loop(hours=24)
+async def printer(self):
+    global channel, counter
+    await channel.send(quotes[counter])
+    if counter != 498:
+        counter += 1
+
+
+get()
 token = os.getenv("DISCORD_BOT_TOKEN")
-client.run(token)
