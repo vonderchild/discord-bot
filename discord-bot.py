@@ -18,6 +18,8 @@ def get_insult():
 
 client = commands.Bot(command_prefix='!', intents=intents)
 
+channel = client.get_channel(833117650317869061)
+
 
 @client.command(name="abuse")
 async def id_(ctx, user: discord.User):
@@ -46,10 +48,18 @@ async def id_(ctx, user: discord.User):
 
 @client.event
 async def on_member_join(member):
-    channel = client.get_channel(833117650317869061)
+    global channel
     embed = discord.Embed(title=f"Welcome {member.name}", description=f"Thanks for joining {member.guild.name}!")
     embed.set_thumbnail(url=member.avatar_url)
     await channel.send(embed=embed)
+
+
+@client.event
+async def on_ready():
+    global channel
+    print("We have logged in as {0.user}".format(client))
+
+    await channel.send("Guess who's back? RICARDO ftw", file=discord.File('ricardo.gif'))
 
 
 get_insult()
