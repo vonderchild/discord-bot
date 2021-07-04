@@ -6,8 +6,7 @@ from discord.ext import commands, tasks
 
 intents = discord.Intents.default()
 intents.members = True
-insults = []
-quotes = []
+insults = quotes = []
 counter = 2
 
 
@@ -26,14 +25,9 @@ def get():
 client = commands.Bot(command_prefix='!', intents=intents)
 
 
-@client.command(name="abuse")
-async def id_(ctx, user: discord.User):
-    await ctx.channel.send(f"Kutta {user.mention}")
-
-
 @client.command(name="chup")
 async def id_(ctx, user: discord.User):
-    await ctx.channel.send(f"Chup kar kutte {user.mention}")
+    await ctx.channel.send(f"Chup karo {user.mention}")
 
 
 @client.command(name="encourage")
@@ -53,11 +47,11 @@ async def id_(ctx):
 
 @client.command(name="insult")
 async def id_(ctx, user: discord.User):
-    if ctx.message.author.id == 490516690518540299 or ctx.message.author.id == 510833310339956752:
+    if user.id != 490516690518540299:
         insult = random.choice(insults)
         await ctx.channel.send(f"{user.mention}, {insult}")
     else:
-        await ctx.channel.send(f"{ctx.author.mention}, you are not allowed to insult, stfu.")
+        await ctx.channel.send(f"{ctx.author.mention}, you are not allowed to insult {user.mention}, stfu.")
 
 
 @client.event
