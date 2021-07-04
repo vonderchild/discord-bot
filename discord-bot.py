@@ -8,7 +8,7 @@ intents = discord.Intents.default()
 intents.members = True
 insults = []
 quotes = []
-counter = 0
+counter = 2
 
 
 def get():
@@ -40,8 +40,9 @@ async def id_(ctx, user: discord.User):
 async def id_(ctx):
     global counter
     await ctx.channel.send(quotes[counter])
+    counter += 1
     if counter != 498:
-        counter += 1
+        counter = 0
 
 
 @client.command(name="gay")
@@ -83,8 +84,9 @@ async def on_ready():
 async def printer(self):
     global channel, counter
     await channel.send(quotes[counter])
+    counter += 1
     if counter != 498:
-        counter += 1
+        counter = 0
 
 
 get()
