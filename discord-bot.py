@@ -41,7 +41,7 @@ async def id_(ctx):
     global counter
     await ctx.channel.send(quotes[counter])
     counter += 1
-    if counter != 498:
+    if counter == 498:
         counter = 0
 
 
@@ -85,7 +85,7 @@ async def printer(self):
     global channel, counter
     await channel.send(quotes[counter])
     counter += 1
-    if counter != 498:
+    if counter == 498:
         counter = 0
 
 
